@@ -75,10 +75,7 @@ body {
   gap: 5px; /* Отступ между картинкой и текстом */
 }
 
-.coin-icon {
-  width: 4em; /* Задаем размер относительно размера шрифта родителя */
-  height: auto; /* Сохраняем пропорции картинки */
-}
+
 /* Стиль для счетчика врагов, выравнивание по правому нижнему углу */
 #enemies-score-wrap {
   right: 10px;
@@ -91,3 +88,46 @@ body {
   transform: translate(-50%, 0%);
 }
 
+#gameOverContainer {
+  display: none; /* Скрыть контейнер изначально */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1000; /* Убедиться, что контейнер находится поверх других элементов */
+}
+
+#restartButton {
+  display: block; /* Сделать кнопку блочным элементом для переноса на новую строку */
+  margin: 0 auto; /* Центрировать кнопку внутри контейнера */
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#totalScoreContainer {
+  margin-top: 20px; /* Добавить немного пространства между кнопкой и счетом */
+}
+.total-score-bottom {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+.icons-container {
+  display: flex; /* Активирует флексбокс для контейнера */
+  align-items: center; /* Центрирует элементы по вертикали */
+  justify-content: flex-start; /* Выравнивание элементов к началу контейнера */
+  gap: 10px; /* Добавляет пространство между элементами */
+}
+.coin-icon,
+.enemy-icon {
+  width: 50px; /* Устанавливает фиксированный размер для иконок */
+  height: auto; /* Сохраняет пропорции изображения */
+}

@@ -1,3 +1,4 @@
+
 import { Player } from "./player.js";
 import { Projectile } from "./projectile.js";
 import { Enemy } from "./enemy.js";
@@ -24,15 +25,25 @@ let spawnIntervalId;
 let scoreFromEnemies = 0;
 let scoreFromCoins = 0;
 
-startGame();
+document.addEventListener('DOMContentLoaded', () => {
+  const restartButton = document.getElementById("restartButton");
+  if (restartButton) {
+      restartButton.addEventListener("click", restartGame);
+  }
+  startGame();
+});
+
 
 function startGame() {
   init();
   animate();
   spawnEnemies();
+   
+
 }
 
-
+// Скрываем кнопку перезапуска
+document.getElementById("restartButton").addEventListener("click", restartGame);
 function init() {
   const movementLimits = {
     minX: 0,
@@ -43,12 +54,22 @@ function init() {
   player = new Player(canvas.width / 2, canvas.height / 2, context, movementLimits);
   const scoreWrap = document.querySelector('.score-wrap');
   
-  const coinIcon = new Image();
-  coinIcon.src = 'reefIcon.png'; // Укажите реальный путь к вашему изображению монеты
-  coinIcon.alt = 'Coin';
-  coinIcon.classList.add('coin-icon');
-  scoreWrap.insertBefore(coinIcon, scoreWrap.firstChild);
 
+
+  let coinIcon = document.getElementById("coinIcon");
+  if (!coinIcon) {
+    // Если элемент не найден, создаем новый
+    coinIcon = new Image();
+    coinIcon.id = "coinIcon";
+    coinIcon.src = "img/reefIcon.jpg";
+    coinIcon.alt = "Coin";
+    coinIcon.classList.add("coin-icon");
+    const scoreWrap = document.querySelector('.score-wrap');
+    scoreWrap.insertBefore(coinIcon, scoreWrap.firstChild);
+  } else {
+    // Если элемент найден, обновляем его свойства, если это необходимо
+    coinIcon.src = "img/reefIcon.jpg"; // Пример обновления свойства
+  }
   // Добавляем обработчик события на клик для создания снарядов
   addEventListener("click", createProjectile);
 }
@@ -105,16 +126,61 @@ enemies = enemies.filter(enemy => enemy.health > 0);
 
   // Обновление игрока
   player.update();
+  function showGameOver() {
+    document.getElementById("gameOverContainer").style.display = "block";
+    document.getElementById("restartButton").style.display = "block"; // Убедитесь, что кнопка видима
+    // Установить обработчик события click только один раз, если он ещё не установлен
+    document.getElementById("restartButton").onclick = restartGame;
 
+    // Здесь также можете обновить итоговый счет и выполнить другие необходимые действия
+  }
+  function updateTotalScore() {
+    const totalScore = scoreFromEnemies + scoreFromCoins;
+    document.getElementById("live-total-score").textContent = totalScore; // Обновляем счёт во время игры
+  }
   // Проверка на проигрыш
   const isGameOver = enemies.some(checkHittingPlayer);
   if (isGameOver) {
-    wastedElement.style.display = "block";
+    document.getElementById("total-score").textContent = scoreFromEnemies + scoreFromCoins; // Обновление финального счёта
+    document.getElementById("gameOverContainer").style.display = "block"; // Показ контейнера завершения игры
+    showGameOver();
+
     clearInterval(countIntervalId);
     clearInterval(spawnIntervalId);
     cancelAnimationFrame(animationId);
+   
   }
 }
+function restartGame() {
+  // Скрываем изображение "Wasted"
+
+  document.getElementById("gameOverContainer").style.display = "none";
+  resetGame();
+}
+  function resetGame() {  // Сбрасываем игровые переменные
+  coins = [];
+  projectiles = [];
+  enemies = [];
+  particles = [];
+  scoreFromEnemies = 0;
+  scoreFromCoins = 0;
+
+  
+  
+  // Сбрасываем счетчики на интерфейсе
+  coinsScoreEl.textContent = '0';
+  enemiesScoreEl.textContent = '0';
+  scoreEl.textContent = '0'; // Сброс общего счета
+  updateTotalScore()
+  // Возобновляем игровой цикл
+  cancelAnimationFrame(animationId); // Важно отменить текущий цикл анимации, если он активен
+  
+  // Скрываем кнопку перезапуска
+  document.getElementById("restartButton").style.display = "none";
+  startGame(); // Перезапускаем игру
+
+}
+
 function checkCoinCollection(player, coin) {
   // Реализуйте логику проверки сбора монеты игроком
   const distance = distanceBetweenTwoPoints(player.x, player.y, coin.x, coin.y);
@@ -132,7 +198,7 @@ function increaseScoreByCoin(amount = 100) {
 }
 function updateTotalScore() {
   const totalScore = scoreFromEnemies + scoreFromCoins;
-  scoreEl.innerText = totalScore;
+  document.getElementById("live-total-score").textContent = totalScore; // Убедитесь, что ID соответствует вашему HTML
 }
 
   particles.forEach(particle => particle.update());

@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GTA 2</title>
-  <link type="Image/x-icon" href="./favicon.ico" rel="icon">
-  <link href="./style.css" rel="stylesheet" type="text/css">
-  <script src="./script.js" type="module"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA 2</title>
+    <link type="Image/x-icon" href="./favicon.ico" rel="icon">
+    <link href="./style.css" rel="stylesheet" type="text/css">
+    <script src="./script.js" type="module"></script>
 </head>
 <body>
-  
- 
-  <div class="score-wrap">
-    <img src="./img/wasted.png" class="wasted" style="display: none;"> <!-- Лучше скрыть изначально -->
-      <div id="coins-score-wrap" class="score-wrap">
-        <img src="img/reefIcon.jpg" alt="Coin" class="coin-icon">
-        <span>Coins: <span id="coins-score">0</span></span>
-      </div>
+  <div class="icon-container">
+    <div id="coins-score-wrap" class="score-wrap">
+      <img src="img/reefIcon.jpg" alt="Coin" class="coin-icon" style ="display:none;">
+      <span>Coins: <span id="coins-score">0</span></span>
+    </div>
     <div id="enemies-score-wrap" class="score-wrap">
+      <img src="img/killScore.jpg" alt="Enemy" class="enemy-icon">
       <span>Enemies: <span id="enemies-score">0</span></span>
     </div>
-    <div class="general-score-wrap score-wrap">
-      <span>Total Score: <span id="total-score">0</span></span>
-    </div>
-  <div class="bg-wrap">
-    <div class="left-bg"></div>
-    <div class="center-bg"></div>
-    <div class="right-bg"></div>
   </div>
-  <canvas></canvas>
+  
+        <div id="totalScoreBottom" class="score-item total-score-bottom">
+            Total Score: <span id="live-total-score">0</span>
+        </div>
+    </div>
+    <div id="gameOverContainer" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; display: none;">
+        <img src="./img/wasted.png" class="wasted" alt="Wasted" style="max-width: 100%; height: auto; display: block;">
+        <button id="restartButton">Перезапуск</button>
+        <div id="totalScoreContainer">
+            <span>Total Score: <span id="total-score">0</span></span>
+        </div>
+    </div>
+    <div class="bg-wrap">
+        <div class="left-bg"></div>
+        <div class="center-bg"></div>
+        <div class="right-bg"></div>
+    </div>
+    <canvas></canvas>
 </body>
 </html>
