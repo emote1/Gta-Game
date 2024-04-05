@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.bg-wrap {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+.left-bg {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 1200px;
+  background: url("./img/bg-left.png") repeat-y;
+}
+
+.center-bg,
+.right-bg {
+  display: none;
+}
+
+@media only screen and (min-width: 1200px) {
+  .right-bg {
+    display: block;
+    flex-grow: 1;
+    background: url("./img/bg-right.png") repeat-y;
+  }
+}
+
+@media only screen and (min-width: 2400px) {
+  .right-bg {
+    width: 1200px;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  .center-bg {
+    display: block;
+    flex-grow: 1;
+    background: url("./img/bg-center.png") repeat;
+  }
+}
+
+/* Общий стиль для всех блоков */
+.score-wrap {
+  position: fixed;
+  bottom: 10px;
+  font-family: Arial, sans-serif;
+  color: #FFF;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 100;
+}
+.wasted {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  max-width: 450px;
+}
+
+#coins-score-wrap {
+  display: flex;
+  align-items: center; /* Выравнивание картинки и текста по вертикали */
+  gap: 5px; /* Отступ между картинкой и текстом */
+}
+
+.coin-icon {
+  width: 4em; /* Задаем размер относительно размера шрифта родителя */
+  height: auto; /* Сохраняем пропорции картинки */
+}
+/* Стиль для счетчика врагов, выравнивание по правому нижнему углу */
+#enemies-score-wrap {
+  right: 10px;
+  transform: translateY(0%);
+}
+
+/* Стиль для общего счета, выравнивание в центре нижней части экрана */
+.general-score-wrap {
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
