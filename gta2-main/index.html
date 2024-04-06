@@ -25,13 +25,14 @@
             Total Score: <span id="live-total-score">0</span>
         </div>
     </div>
-    <div id="gameOverContainer" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; display: none;">
-        <img src="./img/wasted.png" class="wasted" alt="Wasted" style="max-width: 100%; height: auto; display: block;">
-        <button id="restartButton">Перезапуск</button>
-        <div id="totalScoreContainer">
-            <span>Total Score: <span id="total-score">0</span></span>
-        </div>
-    </div>
+    <div id="gameOverContainer" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 100;">
+      <button id="restartButton" style="z-index: 10;">Перезапуск</button>
+      <div id="totalScoreContainer" style="z-index: 101;">
+          <span>Total Score: <span id="total-score">0</span></span> 
+      </div>
+  </div>
+  <img src="./img/wasted.png" class="wasted" alt="Wasted" style="position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%); max-width: 100%; height: auto; display: none; z-index: 99;">
+
     <div class="bg-wrap">
         <div class="left-bg"></div>
         <div class="center-bg"></div>

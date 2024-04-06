@@ -24,6 +24,8 @@ let countIntervalId;
 let spawnIntervalId;
 let scoreFromEnemies = 0;
 let scoreFromCoins = 0;
+let cameraX = 0;
+let cameraY = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
   const restartButton = document.getElementById("restartButton");
@@ -101,6 +103,11 @@ function spawnCountEnemies(count) {
     enemies.push(new Enemy(canvas.width, canvas.height, context, player));
   }
 }
+function updateCamera() {
+  // Центрирование камеры относительно игрока
+  cameraX = player.x - canvas.width / 2;
+  cameraY = player.y - canvas.height / 2;
+}
 
 function animate() {
   animationId = requestAnimationFrame(animate);
@@ -127,6 +134,7 @@ enemies = enemies.filter(enemy => enemy.health > 0);
   // Обновление игрока
   player.update();
   function showGameOver() {
+    document.querySelector('.wasted').style.display = 'block';
     document.getElementById("gameOverContainer").style.display = "block";
     document.getElementById("restartButton").style.display = "block"; // Убедитесь, что кнопка видима
     // Установить обработчик события click только один раз, если он ещё не установлен
@@ -153,7 +161,7 @@ enemies = enemies.filter(enemy => enemy.health > 0);
 }
 function restartGame() {
   // Скрываем изображение "Wasted"
-
+  document.querySelector('.wasted').style.display = "none";
   document.getElementById("gameOverContainer").style.display = "none";
   resetGame();
 }
@@ -203,7 +211,6 @@ function updateTotalScore() {
 
   particles.forEach(particle => particle.update());
   projectiles.forEach(projectile => projectile.update());
-  player.update();
   enemies.forEach(enemy => enemy.update());
 
 

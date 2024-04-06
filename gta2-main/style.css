@@ -59,15 +59,6 @@ body {
   border-radius: 5px;
   z-index: 100;
 }
-.wasted {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  max-width: 450px;
-}
 
 #coins-score-wrap {
   display: flex;
@@ -131,3 +122,15 @@ body {
   width: 50px; /* Устанавливает фиксированный размер для иконок */
   height: auto; /* Сохраняет пропорции изображения */
 }
+.wasted {
+  display: none;
+  position: fixed;
+  top: 20%; /* Было 50%, уменьшено для поднятия вверх */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  max-width: 90%;
+  height: auto;
+  z-index: 99;
+}
+
